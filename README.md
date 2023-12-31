@@ -1,0 +1,1 @@
+# sinqia-challenge-ui
