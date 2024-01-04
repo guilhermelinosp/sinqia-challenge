@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import '../styles/Attractions.css'
-import {
-	ResponseSucessRequest,
-	ResponseAttraction
-} from '../interfaces/ResponseSucessRequest'
+import { ResponseAttraction } from '../interfaces/ResponseSucessRequest'
 import { DateTime } from 'luxon'
 
 const Attractions: React.FC = () => {
@@ -31,8 +28,9 @@ const Attractions: React.FC = () => {
 
 	const handleSearch = async () => {
 		try {
-			const response = await axios.get<ResponseSucessRequest>(
-				'http://localhost:5232/api/v1/pontos-turisticos',
+			setLoading(true)
+			const response = await axios.get(
+				'https://sinqia-challenge.azurewebsites.net/api/v1/pontos-turisticos',
 				{
 					params: { search: searchTerm },
 					headers: {

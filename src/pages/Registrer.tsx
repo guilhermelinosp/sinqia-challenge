@@ -17,8 +17,10 @@ const Registrer: React.FC = () => {
 
 	const handleCreate = async () => {
 		try {
+			setLoading(true)
+			setValidationErrors([])
 			const response = await axios.post<ResponseSucessRequest>(
-				'http://localhost:5232/api/v1/pontos-turisticos',
+				'https://sinqia-challenge.azurewebsites.net/api/v1/pontos-turisticos',
 				{
 					name,
 					state,
