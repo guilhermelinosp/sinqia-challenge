@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import '../styles/Attractions.css'
@@ -26,11 +26,17 @@ const Attractions: React.FC = () => {
 		setError(null)
 	}
 
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === 'Enter') {
+			handleSearch()
+		}
+	}
+
 	const handleSearch = async () => {
 		try {
 			setLoading(true)
 			const response = await axios.get(
-				'https://sinqia-challenge.azurewebsites.net/api/v1/pontos-turisticos',
+				'https://sinqia-challenge-boehh.ondigitalocean.app/api/v1/pontos-turisticos',
 				{
 					params: { search: searchTerm },
 					headers: {
@@ -61,15 +67,9 @@ const Attractions: React.FC = () => {
 		}
 	}
 
-	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		if (event.key === 'Enter') {
-			handleSearch()
-		}
+	const handlePageChange = (page: React.SetStateAction<number>) => {
+		setCurrentPage(page)
 	}
-
-	useEffect(() => {
-		localStorage.setItem('searchResults', JSON.stringify(searchResults))
-	}, [searchResults])
 
 	const sortedResults = searchResults.sort((a, b) => {
 		const dateA =
@@ -85,17 +85,12 @@ const Attractions: React.FC = () => {
 		return dateB.toMillis() - dateA.toMillis()
 	})
 
+	const totalPages = Math.ceil(sortedResults.length / 8)
 	const indexOfLastItem = currentPage * 8
 	const currentResults = sortedResults.slice(
 		indexOfLastItem - 8,
 		indexOfLastItem
 	)
-
-	const totalPages = Math.ceil(sortedResults.length / 8)
-
-	const handlePageChange = (page: React.SetStateAction<number>) => {
-		setCurrentPage(page)
-	}
 
 	return (
 		<div className="attractions-container">
@@ -119,6 +114,7 @@ const Attractions: React.FC = () => {
 					<button>Cadastrar</button>
 				</Link>
 			</div>
+
 			{error && <p style={{ color: 'red' }}>{error}</p>}
 
 			<div>

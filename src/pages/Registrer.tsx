@@ -20,7 +20,7 @@ const Registrer: React.FC = () => {
 			setLoading(true)
 			setValidationErrors([])
 			const response = await axios.post<ResponseSucessRequest>(
-				'https://sinqia-challenge.azurewebsites.net/api/v1/pontos-turisticos',
+				'https://sinqia-challenge-boehh.ondigitalocean.app/api/v1/pontos-turisticos',
 				{
 					name,
 					state,

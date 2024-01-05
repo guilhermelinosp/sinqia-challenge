@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 
 export interface ResponseSucessRequest {
-	data: ResponseAttraction[] | { message: string }
+	data: ResponseAttraction[]
 }
 
 export interface ResponseAttraction {
