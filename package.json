@@ -28,7 +28,7 @@
 		"yarn-upgrade-all": "^0.7.2"
 	},
 	"devDependencies": {
-		"@types/luxon": "^3.3.7",
+		"@types/luxon": "^3.4.2",
 		"axios": "^1.6.3",
 		"eslint": "^8.50.0",
 		"eslint-config-prettier": "^9.1.0",
